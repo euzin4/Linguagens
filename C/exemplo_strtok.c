@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(void)
-{
+int main(void){
    char *psRetorno;
    char sFrase[]="Mario Quintana, o maior poeta gaúcho";
 
@@ -16,8 +15,7 @@ int main(void)
    printf("\nRetorno = %s", psRetorno);
    printf("\nFrase = %s", sFrase);
 
-   do
-   {
+   do{
       /* Nas próximas chamadas, deve-se passar um ponteiro “nulo”.
          Isto “indica” para a função que a pesquisa deve continuar
          no ponteiro anterior. */
@@ -25,8 +23,7 @@ int main(void)
 
       /* Um valor nulo (NULL) é considerado sempre falso em comparações
          booleanas (verdadeiro ou falso). */
-      if(psRetorno)
-      {
+      if(psRetorno){
          printf("\nRetorno = %s", psRetorno);
       }
    } while(psRetorno);
