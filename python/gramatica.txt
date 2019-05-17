@@ -1,4 +1,4 @@
-<S>::=s<A>|s<H>|e<C>|e<M>|a<M>|o<M>|i<M>|u<M>
+<S>::=s<A>|s<H>|e<C>|e<M>|a<M>|o<M>|i<M>|u<M> 
 <A>::=e<B>
 <B>::=&
 <C>::=n<D>
