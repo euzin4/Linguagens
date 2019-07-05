@@ -24,4 +24,15 @@ print('\n\nsó letras:', maiusculo[1].isalpha())	#testa se é uma letra se nao f
 minusculo = ''.join(minusculo)	#transforma a lista em uma string usando '' como separador dos elementos da lista na string
 print('tamanho:', len(palavra))	#calcula o numero de caracteres na variavel
 print('minusc:',minusculo,'\n')
-print('tamanho:', len(minusculo))	#calcula o numero de caracteres na variavel
+print('tamanho:', len(minusculo),'\n')	#calcula o numero de caracteres na variavel
+#--------------------------------matriz
+print('\nmatriz:\n')
+matriz = []
+#cria matriz
+for i in range(5):	#numero de linhas
+	matriz.append( [0] * 5 )	#numero de colunas
+
+matriz[2][4] = 2
+
+for i in range(0,5):	#printa matriz
+	print(matriz[i])
