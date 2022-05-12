@@ -1,0 +1,423 @@
+comandos:(outros comandos no caderno)
+
+sudo -u postgres psql /*comando para abrir o postgres com o usuario postgres*/
+psql -U nome_user -h localhost -d postgres  /*jeito mais funcional de acessar o postgres*/
+
+\l lista os DATABESE que o postgres esta guardando
+\d /*lista as TABELAS no bd atual*/ ou \d <tabela> /*lista os atributos da tabela*/
+\c <tabela> <usuario> /*para acessar uma tabela com um usuario em especifico (o usuario não é obrigatório)*/
+\i /'caminho do arquivo' ex:\i /user/arquivo.sql  /*dentro do postgres esse comando executa comandos que estao em um 'arquivo.sql'*/
+
+create user teste  with encrypted password 'teste';  /*cria um usuario 'teste' com a senha 'teste'*/
+grant all privileges on database imdb to teste; /*garante ao usuario 'teste' previlegio total ao banco 'imdb'*/
+
+insert into competicao (sigla, datai, dataf, titulo) values ('cmp1', '17/09/2018', '18/09/2018', 'classico'); /*insere dados na tabela "competicao", os dados estão com '' pois são do tipo varchar e date*/
+
+select * from competicao; /*mostra os dados na tabela "competicao"*/
+select <coluna(s)/atributos> from <origem/tabela> [condição]
+exemplo: select a,b,c from tabela where c='y'; /*mostra as linhas das colunas a,b,c onde existe o valor 'y' na coluna c*/
+
+-begin; //o comandos após o begin só são efetivados após um dos comandos abaixo serem executados
+-rollback; //funciona como um crtl+z quando executado cancela os comandos abaixo do begin
+-commit; /*executa os comandos abaixo do begin mas se existir algum erro no codigo ele volta os dados para o estado antes da execução*/
+
+update <nome_tabela> set <coluna>=<valor> [condição];
+exemplo: update conveniado set status='super' where codcv=26 or codcv=35; /*atualiza os dados da coluna status na tabela conveniado onde o "codcv" é igual aos valores citados*/
+
+delete from <origem/tabela> [condição];
+exemplo1: delete from medico where dtcad <= '31/12/2000' and dtcad >= '01/01/2000'; /*deleta da tabela "medico" os dados que estão entre os valore citados de "dtcad"*/
+exemplo2: delete from medico where cod=1234; //deleta os dados que possuem o "cod" citado na tabela "medico"
+
+SELECT: o que eu quero ver,
+FROM: onde estão os dados,
+WHERE: critério da resposta;
+
+select * from tabela order by tabela.atributo; //exibir em ordem os dados de uma tabela usando 'order by'
+
+/------------------------------------------------------------------------------------------------
+
+/*usando o join*/
+select nomec, nomeb from cidade join bairro on cidade.sigc = bairro.sigc;
+select nomec, nomeb from cidade natural join bairro;  /*os dois comandos mostram atributos(nomec, nomeb) comparando os valores(sigc) em tabelas diferentes*/
+
+natural left join /*left usa os atributos com relação entre duas tabelas e também os que não possuem na tabela da esquerda*/
+natural right join  /*é a mesma coisa do left só que para a direita*/
+
+/-------------------------------------------------------------------------------------------------
+
+select count(sigc) from evento; /*conta quantas linhas sigc possuem valor na tabela evento*/
+select count(<atributo>) from <tabela>; 
+/*para contar quantos elementos existem em uma tabela recomenda-se usar um atributo não nulo*/
+
+select max(capac) from local;  /*mostra o maior valor de 'capac' na tabela 'local'*/
+select max(<atributo>) from <tabela>;
+
+select avg(<atributo>) from <tabela>; /*avg faz a média dos valores do 'atributo' na 'tabela'*/
+
+select sum(<atributo>) from <tabela>; /*sum faz a soma dos 'atributos' na 'tabela'*/
+
+select min(<atributo>) from <tabela>; /*mostra o menor valor*/
+
+/-------------------------------------------------------------------------------------------------
+
+/*usando intersecção (intersection)*/
+select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=1 intersect select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=2; /*retorna o nome dos velejadores que reservaram o barco tipo 1 E tipo 2, para funcionar o 'intersection' os valores retornados (aqui o s.sid e o s.sname) tem que ser os mesmos nos dois 'selects' para a função funcionar*/
+
+/*usando o union*/
+select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=1 union select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=2;/*retorna todos os velejadores que reservaram os barcos tipo 1 OU tipo 2 sem repetir os nomes de quem reservou os dois tipos*/
+
+/*usando except*/
+
+
+/------------------------------------------------------------------------------------------------------------------
+
+/*usando having*/
+select s.name, tpl.dsc from reserve r natural join sailor s join tplevel tpl on tpl.lid=s.sid group by 1,2 having count (*) < 10;
+/*o having só é usado quando count, sum, max,avg precisam ser usados diretamente no condicional, pois são condicionais de grupo e se forem, usados com o where ocorre erro de sintaxe*/
+/*caso em que o where funciona com esses comandos*/
+...where horses = (select max(horses));
+
+
+
+
+==================================================================================================================================
+*********************                       BD2                       *********************
+==================================================================================================================================
+
+para chamar uma função ja criada usa-se: select nomefunc();
+
+------------------------------------------
+
+CREATE or REPLACE FUNCTION somefunc() RETURNS void AS $$
+DECLARE
+	quantity integer := 30;
+BEGIN
+	RAISE NOTICE 'Quantidade é %', quantity;
+END; $$
+LANGUAGE plpgsql;
+
+-------------------------------------------
+
+create function selecionar(p_itemno int)
+returns table(name varchar(50), salary float) as $$
+begin
+	return query select s.name, s.salary from dados as s where s.id = p_itemno;
+end;
+$$ language plpgsql;
+
+-------------------------------------------
+
+create or replace function incrementa(a int)
+returns int as $$
+declare 
+	temp int;
+begin
+	temp = a+1;
+	return(temp);
+end;
+$$ language 'plpgsql';
+
+-------------------------------------------
+08/03/19
+-------------------------------------------
+create table dados ( id int ,  name varchar(50),  age int , address varchar(50), salary float );
+
+1- Crie uma função capaz de aplicar um aumento de 10% para todos os funcionários;
+
+create or replace function asal() returns void as $$
+begin
+	update dados set salary = salary * 1.1;
+end;
+$$ language 'plpgsql';
+
+2- Crie uma função capaz de receber um valor de aumento e o número do id do usuário que se deseja aumentar o salário
+
+create or replace function auser(id int, aum float) returns boolean as $$
+begin
+	aum = aum/100;
+	update dados set salary = salary + salary * aum where id = id;
+	return found;
+end;
+$$ language 'plpgsql';
+
+-------------------------------------------
+14/03/19
+-------------------------------------------
+
+1-crie uma trigger para aumentar 10 % ao salário do salário bruto (devido a impostos) antes de adicionar o valor na tabela.
+
+CREATE FUNCTION aumenta() RETURNS trigger AS $$    //tem que retornar como tipo trigger para funcionar
+	BEGIN        
+		NEW.salary := NEW.salary*1.1;        
+		RETURN NEW;  
+	END;
+$$ LANGUAGE plpgsql;
+
+
+//depois de criar a função(neste caso 'aumenta()') o trigger deve ser criado
+CREATE TRIGGER aumsal BEFORE INSERT OR UPDATE ON emp FOR EACH ROW EXECUTE PROCEDURE aumenta();	
+//o BEFORE é usado para executar o trigger antes de modificar os dados na tabela
+
+
+--
+2-Na  tabela  de  EMPREGADO  abaixo,  faça  um  trigger  de  auditoria  que armazene  as  informações  do  empregado,  bem  como,  
+o  evento (insert, delete ou   update)  que disparou este trigger, o usuário responsável pela alteração e a data do 
+sistema.EMPREGADO( id integer primary key,  nome varchar(50), cpf varchar(15), Num_Departamentointeger,   Salario  DECIMAL(10,2 )
+,Supervisor    varchar(50));Auditoria(empregado_ID int, cpf CHAR(12), Num_Departamentointeger,    Salario  DECIMAL(10,2 ),  
+Supervisor    varchar(50) , evento int, usuario varchar, date date);
+evento=1 caso insert
+evento=2 caso update
+evento=3 caso delete
+
+create or replace function evento() returns trigger as $$
+	begin
+		if (TG_OP='INSERT') then
+			insert into auditoria(evento, usuario, date) values(1, current_user, now());
+			return NEW;
+		elseif (TG_OP='UPDATE') then
+			insert into auditoria(evento, usuario, date) values(2, current_user, now());
+			return NEW;
+		elseif (TG_OP='DELETE') then
+			insert into auditoria(evento, usuario, date) values(3, current_user, now());
+		end if;
+		return NULL;
+	end
+$$ language plpgsql;
+
+
+CREATE TRIGGER tr_evento AFTER INSERT OR UPDATE OR DELETE ON empregado FOR EACH ROW EXECUTE PROCEDURE evento();
+
+---------------------
+21/03/19
+---------------------
+
+-no terminal pode ser usado 'BEGIN;' antes de executar outros comandos e depois 'END;' para garantir que não haja erros nas 
+modificações do BD;
+--
+-com a tabela cliente(numero int primary key, cpf int, nome varchar(50)), faça:
+1)uma transação com "commit" (faça 3 inserts)
+TERMINAL1:
+begin;
+insert into cliente values (1, 123, 'joao');
+insert into cliente values (2, 455, 'jose');
+insert into cliente values (3, 562, 'maria');
+end;
+
+2)uma transação com "rollback" (faça 3 inserts)
+TERMINAL1:
+begin;
+insert into cliente values (4, 123, joao);	<--nome sem aspas(erro)
+insert into cliente values (5, 455, 'jose');
+insert into cliente values (6, 562, 'maria');
+end;
+
+3)uma transação tentando acessar dados de outra transação ainda não "comitados" (abra dois terminais com o postgres)
+TERMINAL1:
+begin;
+insert into cliente values (7, 974, 'josefa');
+(não executar o 'end' e ir para o terminal 2)
+
+TERMINAL2:
+begin;
+update cliente set cpf=681 where numero=7;
+end;
+
+4)rode duas transações com a inserção do mesmo valor de PK, o que acontece? (abra dois terminais com o postgres)
+TERMINAL1:
+begin;
+insert into cliente values (8, 234, 'joao');
+(não executar o 'end' e ir para o terminal 2)
+end;
+
+TERMINAL2:
+begin;
+insert into cliente values (8, 098, 'tiao');
+end;
+(executar o 'end' no terminal1)
+
+----------------------------
+ 22/03/19
+ ----------------------------
+2-Segundo as operações abaixo:
+1) <start t>; 
+2) <T,A,10>; 
+3) <Start U>; 
+4) <U,B,20>; 
+5) <T,C,30>; 
+6) <T,D,40>; 
+7) <Commit T>; 
+8) <U,E,50>; 
+9) <Commit U>
+Suponha que uma operação de checkpoint não bloqueante tenha iniciado imediatamente depois da operação abaixo. Quando o CKPT END é 
+escrito?  
+A) 2 
+'start ckpt T', entre as linhas 2 e 3
+'end ckpt T', entre as linhas 7 e 8
+B) 3 
+'start ckpt U', entre as linhas 4 e 5
+'end ckpt U', entre as linhas 9 e 10
+C) 6 
+???
+
+
+----------------------------
+29/03/19
+----------------------------
+atividade 5:
+1 Quais transações executam o Redo e quais executam o Undo? 
+REDO: t1, t2, t3, t7;
+UNDO: t4, t5, t6;
+2 Qual é o valor final nas variáveis?
+(para facilitar, primeiro é alterado os valores em que será feito o REDO: t1, t2, t3, t7; e depois os valores em que será feito o 
+UNDO: t4, t5, t6;)
+A=25, B=30, C=55, D=31, E=28, F=1; 
+(explicação: <write(comando) T1(nome da tarefa ligada ao comando), A(variavel que será alterada), 5(valor antigo da variavel), 
+10(valor novo da variavel)>)
+
+<start T1>
+<write T1,A,5,10>
+<start T2>
+<write T2,C,30,45>
+<write T2,E,7,17>
+<commit T2>
+<write T1,C,45,55>
+<start T3>
+<write T3,B,15,20>
+<commit T1>
+<start T4>
+<write T4,C,55,65>
+<checkpoint T3,T4>
+<start T5>
+<write T5,D,31,39>
+<start T6>
+<write T3,A,5,25>
+<write T6,F,1,2>
+<write T3,E,17,28>
+<commit T3>
+<write T6,A,25,32>
+<start T7>
+<write T7,B,20,30>
+<commit T7>
+<write T4,E,28,34>
+Crash!
+
+------------------------------------
+04/04/19
+------------------------------------
+*concorrencia
+*uma operação é serial quando todas as operações de um usuário é executada para depois passar para as execuções de outro usuario
+
+------------------------------------------------------------------------------------------------------------
+
+------------------------------------
+02/05/19
+------------------------------------
+1-usando MRU(Most recently used) e LRU(Least recently used):
+Suponhamos uma leitura que recupere duas vezes as páginas 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 e 15 (e um buffer com 10 
+páginas e comporta uma tupla por página - vazio)
+MRU:
+->|-|-|-|-|-|-|-|-|-|-| 
+->|1|2|3|4|5|6|7|8|9|10|
+->|1|2|3|4|5|6|7|8|9|11|
+->|1|2|3|4|5|6|7|8|9|12|
+->|1|2|3|4|5|6|7|8|9|13|
+->|1|2|3|4|5|6|7|8|9|14|
+->|1|2|3|4|5|6|7|8|9|15|
+
+->|1|2|3|4|5|6|7|8|10|15|
+->|1|2|3|4|5|6|7|8|11|15|
+->|1|2|3|4|5|6|7|8|12|15|
+->|1|2|3|4|5|6|7|8|13|15|
+
+->|1|2|3|4|5|6|7|8|14|15|
+x=20 acessos
+
+LRU:
+->|-|-|-|-|-|-|-|-|-|-| 
+->|1|2|3|4|5|6|7|8|9|10|
+->|11|2|3|4|5|6|7|8|9|10|
+->|11|12|3|4|5|6|7|8|9|10|
+->|11|12|13|4|5|6|7|8|9|10|
+->|11|12|13|14|5|6|7|8|9|10|
+->|11|12|13|14|15|6|7|8|9|10|
+->|11|12|13|14|15|1|7|8|9|10|
+->|11|12|13|14|15|1|2|8|9|10|
+->|11|12|13|14|15|1|2|3|9|10|
+->|11|12|13|14|15|1|2|3|4|10|
+->|11|12|13|14|15|1|2|3|4|5|
+->|11|12|13|14|15|1|2|3|4|5|
+
+----------------------------------------------------
+03/05/19
+----------------------------------------------------
+
+*clock algorithm no caderno
+
+1)Execute o LRU e algoritmo do clock para as seguintes requisições. Identifique quantas páginas são carregadas. Buffer com 
+tamanho 4
+entradas: 3, 2, 3, 0, 8, 4, 2, 5, 0, 9, 8, 3, 2;
+->resultado no caderno
+---------------
+
+1-Na árvore abaixo, o que tenho que fazer para saber se tem 10 unidades de espaço disponíveis?
+   8 
+ 8   5 
+8 8 3 5
+r:olhando o valor da raiz, que é o maior valor da arvore
+
+2) Atualize a árvore acima após a alocação de 6 novas unidades de espaço. 
+   8 
+ 8   5 
+8 8 3 5
+
+   8 
+ 8   5 
+2 8 3 5
+a casa de valor 8 foi subtraida 6 e virou 2 mas sua casa pai nao muda pois a sua casa irmã é 8
+
+----------------------------------------------------
+09/05/19
+----------------------------------------------------
+
+1)create table Movie(name char(30), address char (255), data date*)
+*date ocupa 10 bytes;
+-Suponha que os registros da tabela Movie serão armazenados em páginas de 4kb. O cabeçalho do registro ocupa 12 bytes (ponteiro 
+para o esquema, tamanho registro, timestamp). Quantos registros cabem na página?(paginação de tamanho fixo)
+
+12 bytes(cabeçalho/inf. de config)+30(char)+255(char)+10(date)=307 bytes
+4kb=4096
+4096/307=13 registros
+--------------
+2)Insira os registros abaixo em uma página com tamanho variado. Os registros tem no maximo 200 bytes cada. Demonstre o que 
+acontece no caso dos registros terem seu tamanho alterado para 300 bytes.
+a)“A”
+b)“BBBBBBBB”
+c)“DDDDDDDDDDDDDDD"
+d)O que acontece caso o primeiro registro seja alterado para “ABXXXXX”
+(no caderno)
+
+----------------------------------------------------
+07/06/19
+----------------------------------------------------
+
+*indices clusterizados são como uma arvore b+, mas ordenada a partir de somente uma coluna do BD (um tipo de dado especifico, ex: 
+ordenação a partir dos nomes em uma tabela);
+
+----------------------------------------------------
+13/06/19
+----------------------------------------------------
+
+*otimização de consulta (slides)
+*join sem where é o mesmo que multiplicar o tamanho de uma tabela com o tamanho da outra
+---------
+r=100 tuplas, 1000 paginas
+s=80tp, 500p
+
+pale-oriented nested
+r*s+r=valor
+
+simple nested loop join
+r+s=valor
+
+advanced nested loop join(olhar slide)
+r+s*[r/(b-2)]=valor
