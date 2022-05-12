@@ -86,7 +86,14 @@ select s.name, tpl.dsc from reserve r natural join sailor s join tplevel tpl on 
 
 para chamar uma função ja criada usa-se: select nomefunc();
 
-------------------------------------------
+CREATE TRIGGER nome_trigger BEFORE INSERT OR UPDATE OR DELETE ON nome_tabela FOR EACH ROW EXECUTE PROCEDURE nome_funcao();
+DROP TRIGGER nome_trigger IF EXISTS ON nome_tabela;
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------
 
 CREATE or REPLACE FUNCTION somefunc() RETURNS void AS $$
 DECLARE
