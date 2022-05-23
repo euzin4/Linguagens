@@ -90,6 +90,8 @@ CREATE TRIGGER nome_trigger BEFORE INSERT OR UPDATE OR DELETE ON nome_tabela FOR
 DROP TRIGGER nome_trigger IF EXISTS ON nome_tabela;
 
 SELECT pg_size_pretty( pg_total_relation_size('nome_tabela'));	/*comando para ver o tamanho da tabela no postgres*/
+select txid_current();		/*mostra qual o id da transaçao atual/ultima*/
+select xmin,id_da_tupla from sua_tabela;	/*lista os ids das transações e os ids das tuplas modificadas na "sua_tabela"*/
 
 
 
