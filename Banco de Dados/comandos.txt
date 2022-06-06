@@ -88,6 +88,7 @@ para chamar uma função ja criada usa-se: select nomefunc();
 
 CREATE TRIGGER nome_trigger BEFORE INSERT OR UPDATE OR DELETE ON nome_tabela FOR EACH ROW EXECUTE PROCEDURE nome_funcao();
 DROP TRIGGER nome_trigger IF EXISTS ON nome_tabela;
+drop function if exists nome_funcao();
 
 SELECT pg_size_pretty( pg_total_relation_size('nome_tabela'));	/*comando para ver o tamanho da tabela no postgres*/
 select txid_current();		/*mostra qual o id da transaçao atual/ultima*/
