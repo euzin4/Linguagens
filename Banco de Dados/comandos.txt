@@ -93,6 +93,7 @@ drop function if exists nome_funcao();
 SELECT pg_size_pretty( pg_total_relation_size('nome_tabela'));	/*comando para ver o tamanho da tabela no postgres*/
 select txid_current();		/*mostra qual o id da transaçao atual/ultima*/
 select xmin,id_da_tupla from sua_tabela;	/*lista os ids das transações e os ids das tuplas modificadas na "sua_tabela"*/
+select ctid,* from nome_tabela;		/*o ctid mostra a pagina e o deslocamento "(pagina,deslocamento na pagina)" onde as tuplas estão armazenadas no disco*/
 
 
 
