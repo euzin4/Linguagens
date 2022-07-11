@@ -424,7 +424,7 @@ ex:cluster nome_tabela using id;	#organiza a 'nome_tabela' usando 'id' como indi
 r=100 tuplas, 1000 paginas
 s=80tp, 500p
 
-pale-oriented nested
+page-oriented nested
 r*s+r=valor
 
 simple nested loop join
