@@ -9,6 +9,7 @@ psql -U nome_user -h localhost -d postgres  /*jeito mais funcional de acessar o 
 
 create user teste  with encrypted password 'teste';  /*cria um usuario 'teste' com a senha 'teste'*/
 grant all privileges on database imdb to teste; /*garante ao usuario 'teste' previlegio total ao banco 'imdb'*/
+ALTER USER username WITH SUPERUSER;	/*da direitos de super usuario a 'username'*/
 
 insert into competicao (sigla, datai, dataf, titulo) values ('cmp1', '17/09/2018', '18/09/2018', 'classico'); /*insere dados na tabela "competicao", os dados estão com '' pois são do tipo varchar e date*/
 
