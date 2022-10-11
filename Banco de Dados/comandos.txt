@@ -1,6 +1,9 @@
 sudo -u postgres psql /*comando para abrir o postgres com o usuario postgres*/
 psql -U nome_user -h localhost -d postgres  /*jeito mais funcional de acessar o postgres*/
 
+$pg_dump -C database_name > arquivo_backup.sql	fazer um dump no postgres(exportar)
+$psql -f arquivo.sql	restaurar um banco de dados no postgres(importar)
+
 \l lista os DATABESE que o postgres esta guardando
 \d /*lista as TABELAS no bd atual*/ ou \d <tabela> /*lista os atributos da tabela*/
 \d+ também mostra detalhes adicionais como o tamanho da tabela
