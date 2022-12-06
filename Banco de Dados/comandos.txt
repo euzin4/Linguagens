@@ -110,7 +110,7 @@ BEGIN
 END; $$
 LANGUAGE plpgsql;
 
--------------------------------------------
+---------------------------------------------------------------------
 
 create function selecionar(p_itemno int)
 returns table(name varchar(50), salary float) as $$
@@ -119,7 +119,7 @@ begin
 end;
 $$ language plpgsql;
 
--------------------------------------------
+---------------------------------------------------------------------
 
 create or replace function incrementa(a int)
 returns int as $$
@@ -131,9 +131,7 @@ begin
 end;
 $$ language 'plpgsql';
 
--------------------------------------------
-08/03/19
--------------------------------------------
+---------------------------------------------------------------------
 create table dados ( id int ,  name varchar(50),  age int , address varchar(50), salary float );
 
 1- Crie uma função capaz de aplicar um aumento de 10% para todos os funcionários;
@@ -154,9 +152,7 @@ begin
 end;
 $$ language 'plpgsql';
 
--------------------------------------------
-14/03/19
--------------------------------------------
+---------------------------------------------------------------------
 
 1-crie uma trigger para aumentar 10 % ao salário do salário bruto (devido a impostos) antes de adicionar o valor na tabela.
 
@@ -201,10 +197,7 @@ $$ language plpgsql;
 
 CREATE TRIGGER tr_evento AFTER INSERT OR UPDATE OR DELETE ON empregado FOR EACH ROW EXECUTE PROCEDURE evento();
 
----------------------
-21/03/19
----------------------
-
+---------------------------------------------------------
 -no terminal pode ser usado 'BEGIN;' antes de executar outros comandos e depois 'END;' para garantir que não haja erros nas 
 modificações do BD;
 --
@@ -249,9 +242,7 @@ insert into cliente values (8, 098, 'tiao');
 end;
 (executar o 'end' no terminal1)
 
-----------------------------
- 22/03/19
- ----------------------------
+ ------------------------------------------------------
 2-Segundo as operações abaixo:
 1) <start t>; 
 2) <T,A,10>; 
@@ -273,10 +264,7 @@ B) 3
 C) 6 
 ???
 
-
-----------------------------
-29/03/19
-----------------------------
+------------------------------------------------------
 atividade 5:
 1 Quais transações executam o Redo e quais executam o Undo? 
 REDO: t1, t2, t3, t7;
@@ -315,17 +303,11 @@ A=25, B=30, C=55, D=31, E=28, F=1;
 <write T4,E,28,34>
 Crash!
 
-------------------------------------
-04/04/19
-------------------------------------
+--------------------------------------------------------------
 *concorrencia
 *uma operação é serial quando todas as operações de um usuário é executada para depois passar para as execuções de outro usuario
 
-------------------------------------------------------------------------------------------------------------
-
-------------------------------------
-02/05/19
-------------------------------------
+--------------------------------------------------------------
 1-usando MRU(Most recently used) e LRU(Least recently used):
 Suponhamos uma leitura que recupere duas vezes as páginas 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 e 15 (e um buffer com 10 
 páginas e comporta uma tupla por página - vazio)
@@ -362,8 +344,6 @@ LRU:
 ->|11|12|13|14|15|1|2|3|4|5|
 
 ----------------------------------------------------
-03/05/19
-----------------------------------------------------
 
 *clock algorithm no caderno
 
@@ -390,8 +370,6 @@ r:olhando o valor da raiz, que é o maior valor da arvore
 a casa de valor 8 foi subtraida 6 e virou 2 mas sua casa pai nao muda pois a sua casa irmã é 8
 
 ----------------------------------------------------
-09/05/19
-----------------------------------------------------
 
 1)create table Movie(name char(30), address char (255), data date*)
 *date ocupa 10 bytes;
@@ -411,17 +389,18 @@ d)O que acontece caso o primeiro registro seja alterado para “ABXXXXX”
 (no caderno)
 
 ----------------------------------------------------
-07/06/19
-----------------------------------------------------
+*indices:
+create index on tabela(id);	//cria um indice na 'tabela' usando a coluna 'id'
+//por padrao o indice criado é do tipo 'b+tree'
+\d tabela	//indica o nome criado pelo banco para o indice, o qual sera usado no comando cluster
+cluster tabela using tabela_id_idx;	//ordena a 'tabela' sequencialmente usando o indice criado(custa muito pois reescreve os dados, para deixar as paginas do disco em sequencia de acordo com o indice indicado)
+explain (analyse,buffer) select * from tabela where id<200;
 
 *indices clusterizados são como uma arvore b+, mas ordenada a partir de somente uma coluna do BD (um tipo de dado especifico, ex: 
 ordenação a partir dos nomes em uma tabela);
-ex:cluster nome_tabela using id;	#organiza a 'nome_tabela' usando 'id' como indice
+ex:cluster nome_tabela using tabela_id_idx;	#organiza a 'nome_tabela' usando 'id' como indice
 
 ----------------------------------------------------
-13/06/19
-----------------------------------------------------
-
 *otimização de consulta (slides)
 *join sem where é o mesmo que multiplicar o tamanho de uma tabela com o tamanho da outra
 ---------
