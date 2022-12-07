@@ -389,7 +389,7 @@ d)O que acontece caso o primeiro registro seja alterado para “ABXXXXX”
 (no caderno)
 
 ----------------------------------------------------
-*indices:
+*INDICES:
 create index on tabela(id);	//cria um indice na 'tabela' usando a coluna 'id'
 //por padrao o indice criado é do tipo 'b+tree'
 \d tabela	//indica o nome criado pelo banco para o indice, o qual sera usado no comando cluster
