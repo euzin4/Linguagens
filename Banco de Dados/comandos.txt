@@ -31,6 +31,11 @@ delete from <origem/tabela> [condição];
 exemplo1: delete from medico where dtcad <= '31/12/2000' and dtcad >= '01/01/2000'; /*deleta da tabela "medico" os dados que estão entre os valore citados de "dtcad"*/
 exemplo2: delete from medico where cod=1234; //deleta os dados que possuem o "cod" citado na tabela "medico"
 
+alter table <tabela> add column <nomeColuna> <tipoColuna>;	//adiciona uma coluna a uma tabela já existente
+alter table empregados add column idade int;	//exemplo
+alter table <tabela> drop column <nomeColuna>;			//deleta uma coluna de uma tabela existente
+alter table empregados drop column idade;
+
 SELECT: o que eu quero ver,
 FROM: onde estão os dados,
 WHERE: critério da resposta;
