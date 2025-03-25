@@ -10,4 +10,6 @@ no arquivo:
 head  --retorna o primeiro item da lista
 tail  --retorna todos os itens da lista exceto o primeiro
 
-(1,"algo",'b')  --tupla (pode ter varios tipos)
+(1,'b')  --tupla (pode ter mais de um tipo)
+fst  --retorna o primeiro elemento da tupla
+snd  --retorna o segundo elemento da tupla
