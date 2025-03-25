@@ -1,0 +1,13 @@
+no terminal:
+ghci    --abre o compilador haskell
+:r      --da reload no arquivo aberto
+
+no arquivo:
+-- comentario de uma linha
+{- comentario de varias linhas -}
+
+[1,2,3]  --lista (só pode ser de um tipo)
+head  --retorna o primeiro item da lista
+tail  --retorna todos os itens da lista exceto o primeiro
+
+(1,"algo",'b')  --tupla (pode ter varios tipos)
