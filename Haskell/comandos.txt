@@ -1,1 +1,7 @@
-a
+no terminal:
+ghci    --abre o compilador haskell
+:r      --da reload no arquivo aberto
+
+no arquivo:
+-- comentario de uma linha
+{- comentario de varias linhas -}
