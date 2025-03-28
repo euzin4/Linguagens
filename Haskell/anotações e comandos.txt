@@ -13,3 +13,7 @@ tail  --retorna todos os itens da lista exceto o primeiro
 (1,'b')  --tupla (pode ter mais de um tipo)
 fst  --retorna o primeiro elemento da tupla
 snd  --retorna o segundo elemento da tupla
+
+funcao :: entrada -> retorno  --declaraçao de uma funçao 
+funcao 0 = 1                  --codigo da funçao (se a entrada for 0 retorna 1)
+
