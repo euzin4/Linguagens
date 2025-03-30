@@ -17,10 +17,10 @@ tail  --retorna todos os itens da lista exceto o primeiro
 fst  --retorna o primeiro elemento da tupla
 snd  --retorna o segundo elemento da tupla
 
-funcao :: entrada -> retorno  --declaraçao de uma funçao 
+funcao :: entrada -> retorno  --declaraçao de uma funçao (funcao: nome da funcao, entrada: tipo da entrada, retorno: tipo do retorno, EX: funcao :: String -> String)
 funcao 0 = 1                  --codigo da funçao (se a entrada for 0 retorna 1)
 
-name <- getLine  --entrada de dados pelo teclado
-putStrLn "Digite seu nome:"  --print simples
+variavel <- getLine  --entrada de dados pelo teclado
+putStrLn "frase printada"  --print simples
 putStrLn ("frase fixa " ++ variavel ++ " frase fixa")  --print com variavel
 
