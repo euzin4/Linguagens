@@ -1,3 +1,5 @@
+arquivos de exemplo: https://github.com/euzin4/2025.1/tree/1d18319d2465217700bd821aa80f3f9938448460/linguagens%20de%20programa%C3%A7%C3%A3o/25.03.25%20arq%20de%20aula
+
 no terminal:
 ghci    --abre o compilador haskell
 :r      --da reload no arquivo aberto
