@@ -12,6 +12,8 @@ no arquivo:
 -- comentario de uma linha
 {- comentario de varias linhas -}
 
+module Nome where  --só pode ter 1 modulo por arquivo, o modulo deve ter o mesmo nome do arquivo, a primeira letra do nome deve ser maiúscula
+
 [1,2,3]  --lista (só pode ser de um tipo)
 head  --retorna o primeiro item da lista
 tail  --retorna todos os itens da lista exceto o primeiro
