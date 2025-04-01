@@ -36,3 +36,10 @@ funcaoSoma \x y -> x+y  --funçao lambda que recebe 2 parametros
 --se a funçao for "soma x = x+1" entao:
 map soma [1,2,3]  --retorna [2,3,4]
 
+--funçoes foldl(associativa a esquerda) e foldr(associativa a direita), reduzem uma lista usando uma função binária e um valor inicial:
+foldl (+) 0 []    --retona 0
+foldl (+) 0 [1,2]  --retorna 3
+
+--funçao filter, recebe uma funçao e uma lista como argumento e filta os elementos da lista para o qual a funçao dada resulta em verdadeiro:
+filter par [1,8,10,48,5,-3]  --retorna os valores par da lista "[8,10,48]"
+
