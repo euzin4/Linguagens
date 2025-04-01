@@ -18,7 +18,8 @@ fst  --retorna o primeiro elemento da tupla
 snd  --retorna o segundo elemento da tupla
 
 funcao :: entrada -> retorno  --declaraçao de uma funçao (funcao: nome da funcao, entrada: tipo da entrada, retorno: tipo do retorno, EX: funcao :: String -> String)
-funcao x = x*3                 --codigo da funçao (o valor a recebido 'x' é multiplicado por 3 e o valor é retornado)
+funcao x = x*3                --codigo da funçao (o valor a recebido 'x' é multiplicado por 3 e o valor é retornado)
+funcaoSoma x y = x+y          --função que recebe mais de um parametro
 
 variavel <- getLine  --entrada de dados pelo teclado
 putStrLn "frase printada"  --print simples
@@ -28,4 +29,7 @@ putStrLn ("frase fixa " ++ variavel ++ " frase fixa")  --print com variavel
 nomeFuncao x = x*3  --funçao normal
 \x -> x*3  --funçao Lambda
 --os dois recebem 'x' como parametro mas a funçao lambda não da nome a funçao
+funcaoSoma \x y -> x+y  --funçao lambda que recebe 2 parametros
+
+
 
