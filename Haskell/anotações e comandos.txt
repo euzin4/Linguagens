@@ -5,6 +5,8 @@ no terminal:
 ghci    --abre o compilador haskell
 :r      --da reload no arquivo aberto
 :t      --mostra a o tipo do comando
+let nomeFuncao x = x*3  --define uma funçao diretamente pelo terminal
+
 
 no arquivo:
 -- comentario de uma linha
