@@ -25,7 +25,7 @@ putStrLn "frase printada"  --print simples
 putStrLn ("frase fixa " ++ variavel ++ " frase fixa")  --print com variavel
 
 --Função Lambda:
-soma x y = x+y  --funçao normal
-\ x y -> x+y  --funçao Lambda
---os dois recebem 'x' e 'y' como parametros mas a funçao lambda não da nome a funçao
+soma x = x*3  --funçao normal
+\x -> x*3  --funçao Lambda
+--os dois recebem 'x' como parametro mas a funçao lambda não da nome a funçao
 
