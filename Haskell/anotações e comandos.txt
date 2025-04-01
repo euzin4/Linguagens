@@ -24,3 +24,8 @@ variavel <- getLine  --entrada de dados pelo teclado
 putStrLn "frase printada"  --print simples
 putStrLn ("frase fixa " ++ variavel ++ " frase fixa")  --print com variavel
 
+--Função Lambda:
+soma x y = x+y  --funçao normal
+\ x y -> x+y  --funçao Lambda
+--os dois recebem 'x' e 'y' como parametros mas a funçao lambda não da nome a funçao
+
