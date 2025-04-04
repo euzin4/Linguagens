@@ -15,8 +15,9 @@ no arquivo:
 module Nome where  --só pode ter 1 modulo por arquivo, o modulo deve ter o mesmo nome do arquivo, a primeira letra do nome deve ser maiúscula
 
 [1,2,3]  --lista (só pode ser de um tipo)
-head  --retorna o primeiro item da lista
-tail  --retorna todos os itens da lista exceto o primeiro
+head [] --retorna o primeiro item da lista
+tail [] --retorna todos os itens da lista exceto o primeiro
+reverse [] --inverte a ordem da lista
 
 (1,'b')  --tupla (pode ter mais de um tipo)
 fst  --retorna o primeiro elemento da tupla
