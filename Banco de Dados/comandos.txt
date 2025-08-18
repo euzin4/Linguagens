@@ -73,6 +73,7 @@ select min(<atributo>) from <tabela>; /*mostra o menor valor*/
 select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=1 intersect select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=2; /*retorna o nome dos velejadores que reservaram o barco tipo 1 E tipo 2, para funcionar o 'intersection' os valores retornados (aqui o s.sid e o s.sname) tem que ser os mesmos nos dois 'selects' para a função funcionar*/
 
 /*usando o union*/
+-mostra os dados convergentes entre dois conjuntos de dados
 select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=1 union select s.sid, s.name from sailor s join reserve r on s.sid=r.sid join boat b on r.bid=b.bid where b.tbid=2;/*retorna todos os velejadores que reservaram os barcos tipo 1 OU tipo 2 sem repetir os nomes de quem reservou os dois tipos*/
 
 /*usando except*/
