@@ -50,6 +50,8 @@ select nomec, nomeb from cidade join bairro on cidade.sigc = bairro.sigc;
 select nomec, nomeb from cidade natural join bairro;  /*os dois comandos mostram atributos(nomec, nomeb) comparando os valores(sigc) em tabelas diferentes*/
 
 natural left join /*left usa os atributos com relação entre duas tabelas e também os que não possuem na tabela da esquerda*/
+select nome, coalesce(qdte, 0) from clientes c left join (select cpf, count(*) qdte from locacoes l group by cpf) q on c.cpf = q.cpf; /* coalesce é um comando */
+
 natural right join  /*é a mesma coisa do left só que para a direita*/
 
 /-------------------------------------------------------------------------------------------------
