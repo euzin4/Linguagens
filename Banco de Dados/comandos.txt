@@ -89,8 +89,10 @@ select s.name, tpl.dsc from reserve r natural join sailor s join tplevel tpl on 
 /*caso em que o where funciona com esses comandos*/
 ...where horses = (select max(horses));
 
-
-
+/------------------------------------------------------------------------------------------------------------------
+-VIEW, deixa fixa a otimização da consulta cadastrada, mas como o banco é dinamico, são poucos os casos em que seu uso é recomendado:
+create view nome_view as CONSULTA;
+create view teste as select * from minha_tabela;
 
 ==================================================================================================================================
 *********************                       BD2                       *********************
