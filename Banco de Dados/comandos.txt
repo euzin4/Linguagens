@@ -401,8 +401,10 @@ d)O que acontece caso o primeiro registro seja alterado para “ABXXXXX”
 
 ----------------------------------------------------
 *INDICES:
-create index on tabela(id);	//cria um indice na 'tabela' usando a coluna 'id'
+create index nome_indice on tabela(id);	//cria um indice 'nome_indice' na 'tabela' usando a coluna 'id'
+create index on tabela(id);	//se o nome do indice nao for especificado o banco gera o nome do indice
 //por padrao o indice criado é do tipo 'b+tree'
+drop index nome_indice; //apaga o indice com o nome indicado
 \d tabela	//indica o nome criado pelo banco para o indice, o qual sera usado no comando cluster
 cluster tabela using tabela_id_idx;	//ordena a 'tabela' sequencialmente usando o indice criado(custa muito pois reescreve os dados, para deixar as paginas do disco em sequencia de acordo com o indice indicado)
 explain (analyse,buffer) select * from tabela where id<200;		//mostra os dados de execuçao de uma consulta (nesse caso o select)
