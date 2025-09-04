@@ -405,7 +405,7 @@ create index on tabela(id);	//cria um indice na 'tabela' usando a coluna 'id'
 //por padrao o indice criado é do tipo 'b+tree'
 \d tabela	//indica o nome criado pelo banco para o indice, o qual sera usado no comando cluster
 cluster tabela using tabela_id_idx;	//ordena a 'tabela' sequencialmente usando o indice criado(custa muito pois reescreve os dados, para deixar as paginas do disco em sequencia de acordo com o indice indicado)
-explain (analyse,buffer) select * from tabela where id<200;		//mostra os dados de execiçao de uma consulta (nesse caso o select)
+explain (analyse,buffer) select * from tabela where id<200;		//mostra os dados de execuçao de uma consulta (nesse caso o select)
 
 *indices clusterizados são como uma arvore b+, mas ordenada a partir de somente uma coluna do BD (um tipo de dado especifico, ex: 
 ordenação a partir dos nomes em uma tabela);
