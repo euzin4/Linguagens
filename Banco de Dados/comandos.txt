@@ -434,3 +434,8 @@ r+s*[r/(b-2)]=valor
 ==================================================================================================================================
 
 https://github.com/euzin4/2025.2/blob/main/topicos%20espec%20em%20comp%20xxxii(BD3)/anota%C3%A7oes.txt
+
+-usando LIKE:
+exemplo: select * from clientes c  where nome like '%ao%'
+retorna os dados de todos os clientes com nome que possui 'ao' em alguma parte do nome, o % é um coringa pra dizer que onde ele esta pode ser qualquer coisa
+
