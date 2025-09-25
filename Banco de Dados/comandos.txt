@@ -19,7 +19,7 @@ create table competicao ( sigla varchar(5) ,  datai date,  dataf date , titulo v
 insert into competicao (sigla, datai, dataf, titulo) values ('cmp1', '17/09/2018', '18/09/2018', 'classico'); /*insere dados na tabela "competicao", os dados estão com '' pois são do tipo varchar e date*/
 
 TRUNCATE TABLE nome_tabela;	/*deleta todos os dados da 'nome_tabela' sem deletar a tabela*/
-TRUNCATE TABLE nome_tabela CASCADE;	/*deleta todos os dados da 'nome_tabela' sem deletar a tabela, e deleta os dados de outras tabelas com FK ligadas a esse tabela*/
+TRUNCATE TABLE nome_tabela CASCADE;	/*deleta todos os dados da 'nome_tabela' sem deletar a tabela, e deleta os dados de outras tabelas com FK dependentes dessa tabela*/
 
 select * from competicao; /*mostra os dados na tabela "competicao"*/
 select <coluna(s)/atributos> from <origem/tabela> [condição]
