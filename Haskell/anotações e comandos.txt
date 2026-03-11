@@ -1,6 +1,10 @@
 arquivos de exemplo: 
 https://github.com/euzin4/2025.1/tree/1d18319d2465217700bd821aa80f3f9938448460/linguagens%20de%20programa%C3%A7%C3%A3o/25.03.25%20arq%20de%20aula
 
+#-----NO TERMINAL/GHCI:
+
+ghci             --abre o compilador haskell(GHCI)
+
 comandos uteis do ghci:
 :l arquivo.hs
 :r              --recarrega o programa fonte atual
@@ -11,21 +15,30 @@ comandos uteis do ghci:
 :h              --lista os comandos GHCI
 :q              --termina o GHCI
 
-no terminal:
-ghci                     --abre o compilador haskell
 let nomeFuncao x = x*3   --define uma funçao diretamente pelo terminal
 chr valor(numerico)      --recebe um 'int' e devolve um 'char' de acordo com a tebela ASCII
 
-no arquivo:
+#-----NO ARQUIVO:
+
 -- comentario de uma linha
 {- comentario de varias linhas -}
 
 module Nome where  --só pode ter 1 modulo por arquivo, o modulo deve ter o mesmo nome do arquivo, a primeira letra do nome deve ser maiúscula
 
-[1,2,3]  --lista (só pode ser de um tipo)
-head [] --retorna o primeiro item da lista
-tail [] --retorna todos os itens da lista exceto o primeiro
-reverse [] --inverte a ordem da lista
+lista:
+[num,num,...]            --cria uma lista (só pode ser de um tipo(Num,Char,etc))
+head [num,num,...]     --retorna o primeiro item da lista
+tail [...,num,num]     --retorna todos os itens da lista exceto o primeiro
+reverse [num,num,...]  --inverte a ordem da lista
+null [num,...] ou []   --retorna um boolean dizendo se a lista é vazia
+++                     --concatena listas ex: [1,2] ++ [3,4], retorna: 1234
+num : [num,num,...]    --adiciona um valor no inicio da lista
+
+and [Bool,Bool,... ]   --retorna True se todos os elementos da lista forem verdadeiros
+or [Bool,Bool,...]     --retorna True se algum elemento da lista for verdadeiro
+not [Bool]             --retorna um bool contrario ao elemento de entrada
+
+if condiçao(Num,Bool) then (Num,Char) else (Num,Char)
 
 (1,'b')  --tupla (pode ter mais de um tipo)
 fst  --retorna o primeiro elemento da tupla
