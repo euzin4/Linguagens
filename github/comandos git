@@ -1,0 +1,39 @@
+https://github.com/euzin4/2025.1/tree/main/Introd%20ao%20desenv%20web/github
+
+//---repositorio "master"(projeto_alpha)
+git config --global user.name "gokw"			//configura o nome de usuario
+git config --global user.email "gokw@uffs.edu.br"	//configura o email
+git init --bare		//inicia o repositorio 'master'
+git merge nomeDaBranch	//os arquivos da 'nomeDaBranch' são adicionados (dar merge) a branch usada no momento
+
+dentro da pasta "master"
+git config receive.denyCurrentBranch 'warn'	//libera o push dos clones
+
+//---repositorio clone do "master"(projeto_beta)
+git clone projeto_alpha projeto_beta
+git status
+git add arquivo.txt	//adiciona o arquivo.txt na area de staging
+git add .		//adiciona todos os arquivos da pasta na area de staging
+git commit -m "descriçao das mudanças feitas pelo commit"	//commita as mudanças e adiciona comentario
+git branch nomeDaBranch		//cria uma branch
+git checkout nomeDaBranch	//muda para branch selecionada
+git checkout master		//volta para o repositorio master
+git push	//se o "master" estiver liberado, manda as modificaçoes commitadas para o repositorio que foi clonado(o master) 
+git push -u /home/...	//usa o -u e o caminho da pasta para mudarpara o local do novo repositorio master onde os push serao enviados de agora em diante
+
+//---comandos para enviar do pc para o github
+//configurar o usuario e o email do git antes de tudo
+//criar uma pasta especifica para executar os comandos dentro
+
+git clone https://github.com/"caminho do repositorio que recebera os arquivos"  //vai baixar o repositorio do github no pc
+git init  //inicia o git dentro da pasta atual
+//depois de criar ou modificar o que for preciso
+//use só um dos git add
+git add nomeDoArquivo.txt nomeDoArquivo.py  //adiciona os arquivos especificados na area de staging (esperando commit)
+git add .                                   //adiciona todos os arquivos da pasta na area de staging
+git commit -m "comentarios sobre o que esta sendo feito nesse commit"
+//git remote add origin https://github.com/"caminho do repositorio que recebera os arquivos"  //esse comando só é usado se a pasta do pc não tenha sido clonada do github, se ela foi criada localmente
+git branch -M main  //nome da brach do pc, nesse caso "main"
+git push -u origin main  //envia o commit para o github, precisa do usuario e do token para funcionar
+
+//token em: clica na imagem do usuario -> settings -> descendo na esquerda "developer settings" -> personal access token -> tokens(classic) -> generate new token -> generate new token(classic) -> da o nome do token, seleciona a expiraçao, e seleciona as permissoes (para nao dar erro selecione todas elas) e clique em "generate token" -> o token só aparece quando é criado então salve em um .txt
