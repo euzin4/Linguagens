@@ -438,7 +438,7 @@ r+s*[r/(b-2)]=valor
 *********************                       optativa (bd3)                       *********************
 ==================================================================================================================================
 
-https://github.com/euzin4/2025.2/blob/main/topicos%20espec%20em%20comp%20xxxii(BD3)/anota%C3%A7oes.txt
+https://github.com/euzin4/2025.2/tree/main/topicos%20espec%20em%20comp%20xxxii(BD3)
 
 -usando LIKE:
 exemplo: select * from clientes c  where nome like '%ao%'
