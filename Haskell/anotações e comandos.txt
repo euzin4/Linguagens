@@ -61,7 +61,9 @@ funcaoSoma \x y -> x+y  --funçao lambda que recebe 2 parametros
 
 --funçao map (aplica uma funçao a cada elemento de uma lista):
 --se a funçao for "soma x = x+1" entao:
-map soma [1,2,3]  --retorna [2,3,4]
+map soma [1,2,3]        --retorna [2,3,4]
+ou com lambda:
+map (\x->x+1) [1,2,3]   --retorna [2,3,4]
 
 --funçoes foldl(associativa a esquerda) e foldr(associativa a direita), reduzem uma lista usando uma função binária e um valor inicial:
 foldl (+) 0 []    --retona 0
