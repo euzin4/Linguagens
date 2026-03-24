@@ -40,6 +40,11 @@ or [Bool,Bool,...]     --retorna True se algum elemento da lista for verdadeiro
 not [Bool]             --retorna um bool contrario ao elemento de entrada
 
 if condiçao(Num,Bool) then (Num,Char) else (Num,Char)
+ex:(nesse exemplo o 'res' recebe uma 'lista' e devolve 'string', o 'show' é usado para devolver a lista em formato 'string')
+lst = [1,2,3]
+res = if null lst
+        then "vazio"
+        else show lst
 
 (1,'b')  --tupla (pode ter mais de um tipo)
 fst  --retorna o primeiro elemento da tupla
@@ -66,8 +71,12 @@ ou com lambda:
 map (\x->x+1) [1,2,3]   --retorna [2,3,4]
 
 --funçoes foldl(associativa a esquerda) e foldr(associativa a direita), reduzem uma lista usando uma função binária e um valor inicial:
+com soma(o elemento antes da lista é somado ao primeiro elemento da lista):
 foldl (+) 0 []    --retona 0
-foldl (+) 0 [1,2]  --retorna 3
+foldl (+) 0 [1,2]  --0+1=1+2=3
+com multiplicaçao(o elemento antes da lista é 1 pois qualquer coisa mult por zero é zero):
+foldl (*) 1 [1,2,3,4] --1*1=1*2=2*3=6*4=24
+
 
 --funçao filter, recebe uma funçao e uma lista como argumento e filta os elementos da lista para o qual a funçao dada resulta em verdadeiro:
 filter par [1,8,10,48,5,-3]  --retorna os valores par da lista "[8,10,48]"
