@@ -45,8 +45,8 @@ if condiçao(Num,Bool) then (Num,Char) else (Num,Char)
 fst  --retorna o primeiro elemento da tupla
 snd  --retorna o segundo elemento da tupla
 
-funcao :: entrada -> retorno  --declaraçao de uma funçao (funcao: nome da funcao, entrada: tipo da entrada, retorno: tipo do retorno, EX: funcao :: String -> String)
-funcao x = x*3                --codigo da funçao (o valor a recebido 'x' é multiplicado por 3 e o valor é retornado)
+funcao :: entrada -> retorno  --declaraçao dos tipos de uma funçao (funcao: nome da funcao, entrada: tipo da entrada, retorno: tipo do retorno, EX: funcao :: String -> String)
+funcaoMult3 x = x*3           --declaracao da funçao
 funcaoSoma x y = x+y          --função que recebe mais de um parametro
 
 variavel <- getLine  --entrada de dados pelo teclado
