@@ -73,7 +73,15 @@ map (\x->x+1) [1,2,3]   --retorna [2,3,4]
 --funçoes foldl(associativa a esquerda) e foldr(associativa a direita), reduzem uma lista usando uma função binária e um valor inicial:
 com soma(o elemento antes da lista é somado ao primeiro elemento da lista):
 foldl (+) 0 []    --retona 0
-foldl (+) 0 [1,2]  --0+1=1+2=3
+foldl (+) 0 [1,2]  -- (0+1)+2 =3
+                       1
+                            3
+com foldr a execucao é recursiva e nao exatamente de tras pra frente:
+foldr (-) 0 [1,2,3,4] -- 1-(2-(3-(4-0))) =-2
+                                  4
+                               -1
+                            3
+                         -2
 com multiplicaçao(o elemento antes da lista é 1 pois qualquer coisa mult por zero é zero):
 foldl (*) 1 [1,2,3,4] --1*1=1*2=2*3=6*4=24
 
