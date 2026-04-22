@@ -27,10 +27,11 @@ chr valor(numerico)      --recebe um 'int' e devolve um 'char' de acordo com a t
 module Nome where  --só pode ter 1 modulo por arquivo, o modulo deve ter o mesmo nome do arquivo, a primeira letra do nome deve ser maiúscula
 
 main :: IO()        --normalmente o main é escrito assim
-main = do 
-    putStrLn ("texto printado")        --print de texto simples
+-- pode ser " main = putStrLn ("texto printado") " ou
+main = do     --normalmente o 'do' é usando quando tem entrada de dados (getLine) ou quando o programa precisa de uma sequencia especifica
+    putStrLn ("texto printado")    --print de texto simples
     recebe <- getLine   --recebe um input do teclado e salva na "variavel"
-    putStrLn ("voce digitou " ++ recebe ++ " antes")        --printa um texto e concatena o dado recebido junto dele
+    putStrLn ("voce digitou " ++ recebe ++ " antes")    --printa um texto e concatena o dado recebido junto dele
 
 lista:
 [num,num,...]          --cria uma lista (só pode ser de um tipo(Num,Char,etc))
