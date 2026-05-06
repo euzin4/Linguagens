@@ -68,8 +68,14 @@ putStrLn ("frase fixa " ++ variavel ++ " frase fixa")  --print com variavel
 --Função Lambda:
 nomeFuncao x = x*3  --funçao normal
 \x -> x*3  --funçao Lambda
+ex, no terminal: (\x -> x*3) 1  ,retorna: 3
 --os dois recebem 'x' como parametro mas a funçao lambda não da nome a funçao
 funcaoSoma \x y -> x+y  --funçao lambda que recebe 2 parametros
+
+--calculo lambda:
+(\x -> x + x) y  -- todos os x em e1 são substitudos pelo valor de y, é o que o '\x' esta indicando
+  |    |___|
+   > y   e1
 
 --funçao map (aplica uma funçao a cada elemento de uma lista):
 --se a funçao for "soma x = x+1" entao:
