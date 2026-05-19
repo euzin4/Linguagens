@@ -73,9 +73,10 @@ ex, no terminal: (\x -> x*3) 1  ,retorna: 3
 funcaoSoma \x y -> x+y  --funçao lambda que recebe 2 parametros
 
 --calculo lambda:
-(\x -> x + x) y  -- todos os x em e1 são substitudos pelo valor de y, é o que o '\x' esta indicando
-  |    |___|
-   > y   e1
+(\x -> x + x) y  -- todos os 'x' em e1 são substitudos pelo valor que '\x' esta recebendo de 'y'
+  ^    |___|
+  |     e1
+  y
 
 --funçao map (aplica uma funçao a cada elemento de uma lista):
 --se a funçao for "soma x = x+1" entao:
